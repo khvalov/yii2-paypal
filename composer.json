@@ -1,6 +1,6 @@
 {
 
-  "name": "kun391/yii2-paypal",
+  "name": "khvalov/yii2-paypal",
 
   "description": "Process with Paypal",
 
@@ -35,7 +35,7 @@
 
   "autoload": {
     "psr-4": {
-        "kun391\\paypal\\": "lib/"
+        "khvalov\\paypal\\": "lib/"
     }
   }
 
