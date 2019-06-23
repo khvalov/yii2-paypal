@@ -232,7 +232,7 @@ class RestAPI extends Component
         // A Payment Resource; create one using
         // the above types and intent set to 'sale'
         $payment = new Payment();
-        $payment->setIntent('sale')
+        $payment->setIntent('order')
                 ->setPayer($payer)
                 ->setRedirectUrls($redirectUrls)
                 ->setTransactions([$transaction]);
