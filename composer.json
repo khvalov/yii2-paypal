@@ -35,7 +35,7 @@
 
   "autoload": {
     "psr-4": {
-        "khvalov\\paypal\\": "lib/"
+        "kun391\\paypal\\": "lib/"
     }
   }
 
