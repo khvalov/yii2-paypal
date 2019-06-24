@@ -289,9 +289,6 @@ class RestAPI extends Component
 
         $transactions = $payment->getTransactions();
 
-        var_dump($transactions);
-        exit();
-
         $transaction = $transactions[0];
         $relatedResources = $transaction->getRelatedResources();
         $relatedResource = $relatedResources[0];
@@ -305,7 +302,7 @@ class RestAPI extends Component
         ));
 
      
-            $result = $order->authorize($authorization, $apiContext);
+            $result = $order->authorize($authorization, $this->config);
             $return = @$result->toArray();
             return $return;
     }
