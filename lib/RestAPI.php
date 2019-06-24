@@ -296,16 +296,10 @@ class RestAPI extends Component
             }'
         ));
 
-        try {
-
+     
             $result = $order->authorize($authorization, $apiContext);
             $return = @$result->toArray();
             return $return;
-
-        } catch (\Exception $ex) {
-            throw new \Exception("Error Processing Request".$ex, 1);
-            
-        }
     }
 
 }
