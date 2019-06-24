@@ -15,6 +15,7 @@ use PayPal\Api\ItemList;
 use PayPal\Api\Amount;
 use PayPal\Api\Transaction;
 use PayPal\Api\PaymentExecution;
+use PayPal\Api\Authorization;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 use PayPal\Api\Address;
@@ -276,6 +277,35 @@ class RestAPI extends Component
 
         $result = @$payment->toArray();
         return $result;
+    }
+
+
+    public function authorizeOrder($paymentId) {
+
+        $payment = Payment::get($paymentId, $this->config);
+        $transactions = $payment->getTransactions();
+        $transaction = $transactions[0];
+        $relatedResources = $transaction->getRelatedResources();
+        $relatedResource = $relatedResources[0];
+        $order = $relatedResource->getOrder();
+        $authorization = new Authorization();
+        $authorization->setAmount(new Amount(
+            '{
+                "total": "10.00",
+                "currency": "USD"
+            }'
+        ));
+
+        try {
+
+            $result = $order->authorize($authorization, $apiContext);
+            $return = @$result->toArray();
+            return $return;
+
+        } catch (\Exception $ex) {
+            throw new \Exception("Error Processing Request".$ex, 1);
+            
+        }
     }
 
 }
