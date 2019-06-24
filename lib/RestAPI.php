@@ -281,9 +281,17 @@ class RestAPI extends Component
 
 
     public function authorizeOrder($paymentId) {
-
         $payment = Payment::get($paymentId, $this->config);
+
+        $execution = new PaymentExecution();
+        $execution->setPayerId($_GET['PayerID']);
+        $payment = $payment->execute($execution, $this->config);
+
         $transactions = $payment->getTransactions();
+
+        var_dump($transactions);
+        exit();
+
         $transaction = $transactions[0];
         $relatedResources = $transaction->getRelatedResources();
         $relatedResource = $relatedResources[0];
